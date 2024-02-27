@@ -1,0 +1,22 @@
+output:
+  sort-results: true
+
+linters:
+  enable:
+    - depguard
+    - errorlint
+    - gocritic
+    - godot
+    - goimports
+    - misspell
+    - nolintlint
+    - predeclared
+    - revive
+    - testifylint
+    - unconvert
+    - unused
+
+linters-settings:
+  errcheck:
+    exclude-functions:
+      - encoding/binary.Write
