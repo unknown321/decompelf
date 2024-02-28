@@ -124,7 +124,7 @@ func Start() {
 	slog.Info("global vars", "total", len(gv))
 
 	for _, s := range fh {
-		t.AddSymbol(s.Name, s.Value-elfInfo.ImageBase, s.Size, elf.STT_FUNC)
+		t.AddSymbol(s.Name, s.Value, s.Size, elf.STT_FUNC)
 	}
 
 	for _, s := range gv {
