@@ -100,13 +100,23 @@ Symbol table '.symtab' contains 4 entries:
 
 ### Using with gdb
 
-Example gdb script with custom elf parameters (put into .gdbinit):
+Example gdb script (put into .gdbinit):
+
+```shell
+define decomp
+  dont-repeat
+  shell decompelf
+  symbol-file /tmp/tinyelf
+end
+```
+
+Example gdb script with custom elf parameters :
 
 ```shell
 define decomp
   dont-repeat
   shell decompelf --machine arm --flags 0x5000000 --arch 32 --byteorder b
-  add-symbol-file /tmp/tinyelf
+  symbol-file /tmp/tinyelf
 end
 ```
 
