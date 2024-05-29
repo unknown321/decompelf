@@ -51,10 +51,10 @@ type TinyELF struct {
 var IDENT32 = [16]byte{0x7f, 'E', 'L', 'F', 0x01, 0x01, 0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 var IDENT64 = [16]byte{0x7f, 'E', 'L', 'F', 0x02, 0x01, 0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
-func New32(filename string, machine elf.Machine, flags uint32, byteOrder binary.ByteOrder) *TinyELF {
+func New32(filename string, machine elf.Machine, flags uint32, byteOrder binary.ByteOrder, elfType uint) *TinyELF {
 	header := elf.Header32{
 		Ident:     IDENT32,
-		Type:      uint16(elf.ET_REL),
+		Type:      uint16(elfType),
 		Machine:   uint16(machine),
 		Version:   uint32(elf.EV_CURRENT),
 		Flags:     flags,
@@ -191,10 +191,10 @@ func (t *TinyELF) AddSymbol(name string, value int, size int, symType elf.SymTyp
 	}
 }
 
-func New64(filename string, machine elf.Machine, flags uint32, byteOrder binary.ByteOrder) *TinyELF {
+func New64(filename string, machine elf.Machine, flags uint32, byteOrder binary.ByteOrder, elfType uint) *TinyELF {
 	header := elf.Header64{
 		Ident:     IDENT64,
-		Type:      uint16(elf.ET_REL),
+		Type:      uint16(elfType),
 		Machine:   uint16(machine),
 		Version:   uint32(elf.EV_CURRENT),
 		Flags:     flags,

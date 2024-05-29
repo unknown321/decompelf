@@ -21,6 +21,7 @@ func Start() {
 	var fByteOrder string
 	var arch int
 	var list bool
+	var elfType int
 	flag.StringVar(&url, "url", "http://localhost:3662/RPC2", "decomp2dbg server url")
 	flag.StringVar(&filename, "out", "/tmp/tinyelf", "")
 	flag.StringVar(&fMachine, "machine", "", "ex. X86_64")
@@ -28,6 +29,7 @@ func Start() {
 	flag.StringVar(&fByteOrder, "byteorder", "l", "l - little endian, b - big endian")
 	flag.IntVar(&arch, "arch", 0, "32 or 64 bit")
 	flag.BoolVar(&list, "l", false, "list all machines")
+	flag.IntVar(&elfType, "elftype", int(elf.ET_REL), "https://pkg.go.dev/debug/elf#Type")
 	flag.Parse()
 
 	if list {
@@ -102,9 +104,9 @@ func Start() {
 		"is_32bit", is32, "flags", fmt.Sprintf("0x%02x", flagsInt), "byteorder", byteOrder, "image_base", fmt.Sprintf("0x%02x", elfInfo.ImageBase))
 
 	if is32 {
-		t = tinyelf.New32(filename, mach.Value, uint32(flagsInt), byteOrder)
+		t = tinyelf.New32(filename, mach.Value, uint32(flagsInt), byteOrder, uint(elfType))
 	} else {
-		t = tinyelf.New64(filename, mach.Value, uint32(flagsInt), byteOrder)
+		t = tinyelf.New64(filename, mach.Value, uint32(flagsInt), byteOrder, uint(elfType))
 	}
 
 	fh, err := c.FunctionHeaders()
