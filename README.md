@@ -14,18 +14,20 @@ make build
 ```shell
 Usage of ./decompelf:
   -arch int
-        32 or 64 bit (default 64)
+    	32 or 64 bit
   -byteorder string
-        l - little endian, b - big endian (default "l")
+    	l - little endian, b - big endian (default "l")
+  -elftype int
+    	https://pkg.go.dev/debug/elf#Type (default 1)
   -flags string
-        ELF flags (default "0x0")
-  -l    list all machines
+    	ELF flags, ex. 0x0
+  -l	list all machines
   -machine string
-         (default "X86_64")
+    	ex. X86_64
   -out string
-         (default "/tmp/tinyelf")
+    	 (default "/tmp/tinyelf")
   -url string
-        decomp2dbg server url (default "http://localhost:3662/RPC2")
+    	decomp2dbg server url (default "http://localhost:3662/RPC2")
 ```
 
 Command-line options take priority over decomp2dbg-provided values.
